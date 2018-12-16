@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生问卷（第一页）</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" class="ui" href="http://www.semantic-ui.cn/dist/semantic.min.css">
+    <script type="text/javascript" src="http://www.semantic-ui.cn/javascript/library/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.semantic-ui.cn/dist/semantic.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <style type="text/css">
+        .datimianban{margin:0 auto; width:800px;}
+    </style>
+    <!--缓存设置-->
+    <script>
+        //定义全局变量函数
+        var uzStorage = function () {
+            var ls = window.localStorage;
+            return ls;
+        };
+        //定义全局变量u
+        var u = {};
+        //设置缓存
+        u.setStorage = function (key, value) {
+            var v = value;
+            if (typeof v == 'object') {
+                v = JSON.stringify(v);
+                v = 'obj-' + v;
+            } else {
+                v = 'str-' + v;
+            }
+            var ls = uzStorage();
+            if (ls) {
+                ls.setItem(key, v);
+            }
+        };
+        //获取缓存
+        u.getStorage = function (key) {
+            var ls = uzStorage();
+            if (ls) {
+                var v = ls.getItem(key);
+                if (!v) {
+                    return;
+                }
+                if (v.indexOf('obj-') === 0) {
+                    v = v.slice(4);
+                    return JSON.parse(v);
+                } else if (v.indexOf('str-') === 0) {
+                    return v.slice(4);
+                }
+            }
+        };
+        //清理缓存
+        u.clearStorage = function() {
+            localStorage.clear()
+        };
+
+    </script>
+</head>
+<body>
+     <div class="datimianban" id="app">
+        <form class="ui form">
+            <div class="ui segments">
+                <div class="ui huge breadcrumb">
+                    <a class="section" href="/index/">问卷调查首页</a>
+                    <a class="section">|</a>
+                    <a class="section">学生问卷</a>
+                </div>
+                <h3 class="ui horizontal divider header">
+                    答题部分
+                </h3>
+                <!--答题部分-->
+                <h4 class="ui dividing header">同学们：<br>&nbsp;&nbsp;你们好！为进一步做好儿童、青少年的口腔保健工作，我们很想知道你对口腔保健的想法和做法，本调查与你们的学习成绩无关，调查结果也不会告诉家长和老师。希望你们按题目的要求如实回答。谢谢！</h4>
+                <h4 class="ui dividing header">要求：请选择相应的选择题选项。</h4>
+                <!--1---5题-->
+                <div class="ui segment">
+                    <div class="inline fields">
+                        <label for="Q1">Q1.你是独生子女吗？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q1" checked="" tabindex="0" class="hidden" v-model="anwser.Q1" value="1" id="father">
+                                <label for="father">是</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q1" tabindex="0" class="hidden" v-model="anwser.Q1" value="2" id="mother">
+                                <label for="mother">不是</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui red segment">
+                    <div class="field">
+                        <label>Q2.您父亲的最高学历是？（单选）</label>
+                       <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q2" checked="" tabindex="0" class="hidden" v-model="anwser.Q2" value="1" id="Q2a">
+                                <label for="Q2a">没有上过学</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q2" tabindex="0" class="hidden" v-model="anwser.Q2" value="2" id="Q2b">
+                                <label for="Q2b">小学</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q2" checked="" tabindex="0" class="hidden" v-model="anwser.Q2" value="3" id="Q2c">
+                                <label for="Q2c">初中</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q2" tabindex="0" class="hidden" v-model="anwser.Q2" value="4" id="Q2d">
+                                <label for="Q2d">高中</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q2" checked="" tabindex="0" class="hidden" v-model="anwser.Q2" value="5" id="Q2e">
+                                <label for="Q2e">中专</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q2" tabindex="0" class="hidden" v-model="anwser.Q2" value="6" id="Q2f">
+                                <label for="Q2f">大专</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q2" checked="" tabindex="0" class="hidden" v-model="anwser.Q2" value="7" id="Q2g">
+                                <label for="Q2g">本科</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q1" checked="" tabindex="0" class="hidden" v-model="anwser.Q1" value="8" id="Q2h">
+                                <label for="Q2h">是</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q1" tabindex="0" class="hidden" v-model="anwser.Q1" value="9" id="Q2i">
+                                <label for="Q2i">硕士及以上</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui blue segment">
+                    <div class="field">
+                        <label>Q3.您母亲的最高学历是？（单选）</label>
+                       <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q3" checked="" tabindex="0" class="hidden" v-model="anwser.Q3" value="1" id="Q3a">
+                                <label for="Q3a">没有上过学</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q3" tabindex="0" class="hidden" v-model="anwser.Q3" value="2" id="Q3b">
+                                <label for="Q3b">小学</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q3" checked="" tabindex="0" class="hidden" v-model="anwser.Q3" value="3" id="Q3c">
+                                <label for="Q3c">初中</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q3" tabindex="0" class="hidden" v-model="anwser.Q3" value="4" id="Q3d">
+                                <label for="Q3d">高中</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q3" checked="" tabindex="0" class="hidden" v-model="anwser.Q3" value="5" id="Q3e">
+                                <label for="Q3e">中专</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q3" tabindex="0" class="hidden" v-model="anwser.Q3" value="6" id="Q3f">
+                                <label for="Q3f">大专</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q3" checked="" tabindex="0" class="hidden" v-model="anwser.Q3" value="7" id="Q3g">
+                                <label for="Q3g">本科</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q1" tabindex="0" class="hidden" v-model="anwser.Q1" value="8" id="Q3i">
+                                <label for="Q3i">硕士及以上</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui green segment">
+                    <div class="inline fields">
+                        <label for="Q4">Q4.你刷牙吗？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q4" checked="" tabindex="0" class="hidden" v-model="anwser.Q4" value="1" id="Q4a">
+                                <label for="Q4a">刷牙</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q4" tabindex="0" class="hidden" v-model="anwser.Q4" value="2" id="Q4b">
+                                <label for="Q4b">偶尔刷或从不刷（选此项者不回答第5至7题）</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui yellow segment">
+                    <div class="inline fields">
+                        <label for="Q5">Q5.你每天刷几次牙？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q5" checked="" tabindex="0" class="hidden" v-model="anwser.Q5" value="1" id="5A">
+                                <label for="5A">每天刷2次及以上</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q5" tabindex="0" class="hidden" v-model="anwser.Q5" value="2" id="5B">
+                                <label for="5B">每天刷1次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q5" tabindex="0" class="hidden" v-model="anwser.Q5" value="3" id="5C">
+                                <label for="5C">不是每天刷</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--6---10题-->
+                <div class="ui segment">
+                    <div class="inline fields">
+                        <label for="Q6">Q6.你刷牙时用牙膏吗？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q6" checked="" tabindex="0" class="hidden" v-model="anwser.Q6" value="1" id="6A">
+                                <label for="6A">是</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q6" tabindex="0" class="hidden" v-model="anwser.Q6" value="2" id="6B">
+                                <label for="6B">否（选此项者不必回答第7题）</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q6" tabindex="0" class="hidden" v-model="anwser.Q6" value="3" id="6C">
+                                <label for="6C">不知道（选此项者不必回答第7题）</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui red segment">
+                    <div class="inline fields">
+                        <label for="Q7">Q7.你刷牙时使用含氟牙膏吗？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q7" checked="" tabindex="0" class="hidden" v-model="anwser.Q7" value="1" id="7A">
+                                <label for="7A">是</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q7" tabindex="0" class="hidden"  v-model="anwser.Q7" value="2" id="7B">
+                                <label for="7B">否</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q7" tabindex="0" class="hidden" v-model="anwser.Q7" value="3" id="7C">
+                                <label for="7C">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui blue segment">
+                    <div class="inline fields">
+                        <label for="Q8">Q8.你使用牙线吗？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q8" checked="" tabindex="0" class="hidden"  v-model="anwser.Q8" value="1" id="8A">
+                                <label for="8A">不用</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q8" tabindex="0" class="hidden" v-model="anwser.Q8" value="2" id="8B">
+                                <label for="8B">偶尔用</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q8" tabindex="0" class="hidden" v-model="anwser.Q8" value="3" id="8C">
+                                <label for="8C">每周用</label>
+                            </div>
+                        </div>
+                         <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q8" tabindex="0" class="hidden" v-model="anwser.Q8" value="4" id="8D">
+                                <label for="8D">每天用</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui green segment">
+                    <div class="field">
+                        <label for="Q9">Q9.你平时进食以下食品或饮料的情况如何？（每小题只选一个答案）</label>
+                    </div>
+                    <div class="field">
+                        <label for="Q9">(1)甜点心（饼干，蛋糕，面包）及糖果（巧克力，含糖口香糖）</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-1" checked="" tabindex="0" class="hidden" v-model="anwser.Q9a" value="6" id="4A">
+                                <label for="4A">每天>=2次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-1" tabindex="0" class="hidden" v-model="anwser.Q9a" value="5" id="4B">
+                                <label for="4B">每天1次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-1" tabindex="0" class="hidden" v-model="anwser.Q9a" value="4" id="4C">
+                                <label for="4C">每周2-6次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-1" tabindex="0" class="hidden" v-model="anwser.Q9a" value="3" id="4D">
+                                <label for="4D">每周1次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-1" tabindex="0" class="hidden" v-model="anwser.Q9a" value="2" id="4E">
+                                <label for="4E">每月1-3次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-1" tabindex="0" class="hidden" v-model="anwser.Q9a" value="1" id="4F">
+                                <label for="4F">很少／从不</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q9">(2)甜饮料（糖水，可乐等碳酸饮料，橙汁，苹果汁等果汁，柠檬水等非鲜榨果汁）</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-2" checked="" tabindex="0" class="hidden" v-model="anwser.Q9b" value="6" id="4G">
+                                <label for="4G">每天>=2次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-2" tabindex="0" class="hidden" v-model="anwser.Q9b" value="5" id="4X">
+                                <label for="4X">每天1次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-2" tabindex="0" class="hidden" v-model="anwser.Q9b" value="4" id="4N">
+                                <label for="4N">每周2-6次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-2" tabindex="0" class="hidden" v-model="anwser.Q9b" value="3" id="40">
+                                <label for="40">每周1次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-2" tabindex="0" class="hidden" v-model="anwser.Q9b" value="2" id="41">
+                                <label for="41">每月1-3次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-2" tabindex="0" class="hidden" v-model="anwser.Q9b" value="1" id="42">
+                                <label for="42">很少／从不</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q9">(3)加糖的牛奶，酸奶，奶粉，茶，豆浆，咖啡</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-3" checked="" tabindex="0" class="hidden" v-model="anwser.Q9c" value="6" id="43">
+                                <label for="43">每天>=2次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-3" tabindex="0" class="hidden" v-model="anwser.Q9c" value="5" id="44">
+                                <label for="44">每天1次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-3" tabindex="0" class="hidden" v-model="anwser.Q9c" value="4" id="45">
+                                <label for="45">每周2-6次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-3" tabindex="0" class="hidden" v-model="anwser.Q9c" value="3" id="46">
+                                <label for="46">每周1次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-3" tabindex="0" class="hidden" v-model="anwser.Q9c" value="2" id="47">
+                                <label for="47">每月1-3次</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q9-3" tabindex="0" class="hidden" v-model="anwser.Q9c" value="1" id="48">
+                                <label for="48">很少／从不</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui green segment">
+                    <div class="inline fields">
+                        <label for="Q10">Q10.你抽烟吗？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q10" tabindex="0" class="hidden" v-model="anwser.Q10" value="1" id="10A">
+                                <label for="10A">每天抽</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q10" tabindex="0" class="hidden" v-model="anwser.Q10" value="2" id="10B">
+                                <label for="10B">每周抽</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q10" tabindex="0" class="hidden" v-model="anwser.Q10" value="3" id="10C">
+                                <label for="10C">很少或曾经抽</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q10" tabindex="0" class="hidden" v-model="anwser.Q10" value="4" id="10D">
+                                <label for="10D">从不抽</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="four fields">
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                        <div class="ui submit button" style="margin-right: 50px" >
+                            <a class="section" href="/index/B_XS/B_XS-2/" v-on:click="putToStorage">下一页</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $('.ui.radio.checkbox').checkbox();
+         var info = new Vue({
+            el:'#app',
+            data:{
+                anwser:{
+                    Q1: "",
+                    Q2: "",
+                    Q3: "",
+                    Q4:"",
+                    Q5:"",
+                    Q6 :"",
+                    Q7 :"",
+                    Q8 :"",
+                    Q9a :"",
+                    Q9b :"",
+                    Q9c :"",
+                    Q10 :"",
+                }
+            },
+             methods: {
+
+                 putToStorage: function () {
+                     u.setStorage("Q1", this.anwser.Q1);
+                     u.setStorage("Q2", this.anwser.Q2);
+                     u.setStorage("Q3", this.anwser.Q3);
+                     u.setStorage("Q4", this.anwser.Q4);
+                     u.setStorage("Q5", this.anwser.Q5);
+                     u.setStorage("Q6", this.anwser.Q6);
+                     u.setStorage("Q7", this.anwser.Q7);
+                     u.setStorage("Q8", this.anwser.Q8);
+                     u.setStorage("Q9a", this.anwser.Q9a);
+                     u.setStorage("Q9b", this.anwser.Q9b);
+                     u.setStorage("Q9c", this.anwser.Q9c);
+                     u.setStorage("Q10", this.anwser.Q10);
+                     /*
+                     var that = this;
+                     //console.log(src);
+                     $.ajax({
+                         type: "POST",
+                         data: {
+                             "api_key": "deQI3zInZt_NbZYtFW6Pe8UzvYe8P-pf",
+                             "api_secret": "xYmv45t2Dvj5YHd9uwQrIOnFKPyG1-Bn",
+                             "return_attributes": "gender,age,facequality,smiling,emotion,beauty,skinstatus",
+                             "image_base64": that.src,
+                         },
+                         url: "https://api-cn.faceplusplus.com/facepp/v3/detect",
+                         success: function (data) {
+
+                         }
+                     })  */
+                 },
+             }
+        });
+        //console.log(info.infodata.gender)
+    </script>
+</body>
+</html>

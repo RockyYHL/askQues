@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>学生问卷（第二页）</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" class="ui" href="http://www.semantic-ui.cn/dist/semantic.min.css">
+    <script type="text/javascript" src="http://www.semantic-ui.cn/javascript/library/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.semantic-ui.cn/dist/semantic.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <style type="text/css">
+        .datimianban{margin:0 auto; width:800px;}
+    </style>
+    <!--缓存设置-->
+    <script>
+        //定义全局变量函数
+        var uzStorage = function () {
+            var ls = window.localStorage;
+            return ls;
+        };
+        //定义全局变量u
+        var u = {};
+        //设置缓存
+        u.setStorage = function (key, value) {
+            var v = value;
+            if (typeof v == 'object') {
+                v = JSON.stringify(v);
+                v = 'obj-' + v;
+            } else {
+                v = 'str-' + v;
+            }
+            var ls = uzStorage();
+            if (ls) {
+                ls.setItem(key, v);
+            }
+        };
+        //获取缓存
+        u.getStorage = function (key) {
+            var ls = uzStorage();
+            if (ls) {
+                var v = ls.getItem(key);
+                if (!v) {
+                    return;
+                }
+                if (v.indexOf('obj-') === 0) {
+                    v = v.slice(4);
+                    return JSON.parse(v);
+                } else if (v.indexOf('str-') === 0) {
+                    return v.slice(4);
+                }
+            }
+        };
+        //清理缓存
+        u.clearStorage = function() {
+            localStorage.clear()
+        };
+
+    </script>
+</head>
+<body>
+     <div class="datimianban" id="app">
+        <form class="ui form">
+            <div class="ui segments">
+                <div class="ui huge breadcrumb">
+                    <a class="section" href="/index/">问卷调查首页</a>
+                    <a class="section">|</a>
+                    <a class="section">学生问卷</a>
+                </div>
+                <h3 class="ui horizontal divider header">
+                    答题部分
+                </h3>
+                <!--答题部分-->
+                <h4 class="ui dividing header">同学们：<br>&nbsp;&nbsp;你们好！为进一步做好儿童、青少年的口腔保健工作，我们很想知道你对口腔保健的想法和做法，本调查与你们的学习成绩无关，调查结果也不会告诉家长和老师。希望你们按题目的要求如实回答。谢谢！</h4>
+                <h4 class="ui dividing header">要求：请选择相应的选择题选项。</h4>
+                <!--11---15题-->
+                <div class="ui segment">
+                    <div class="inline fields">
+                        <label for="Q11">Q11.你对自己的全身健康状况评价如何？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q11" checked="" tabindex="0" class="hidden" v-model="anwser.Q11" value="1" id="11A">
+                                <label for="11A">很好</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q11" tabindex="0" class="hidden" v-model="anwser.Q11" value="2" id="11B">
+                                <label for="11B">较好</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q11" tabindex="0" class="hidden" v-model="anwser.Q11" value="3" id="11C">
+                                <label for="11C">一般</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q11" tabindex="0" class="hidden" v-model="anwser.Q11" value="4" id="11D">
+                                <label for="11D">较差</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q11" tabindex="0" class="hidden" v-model="anwser.Q11" value="5" id="11E">
+                                <label for="11E">很差</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui red segment">
+                    <div class="inline fields">
+                        <label for="Q12">Q12.你对自己的牙齿和口腔状况评价如何？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q12" checked="" tabindex="0" class="hidden"  v-model="anwser.Q12" value="1" id="12A">
+                                <label for="12A">很好</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q12" tabindex="0" class="hidden"  v-model="anwser.Q12" value="2" id="12B">
+                                <label for="12B">较好</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q12" tabindex="0" class="hidden" v-model="anwser.Q12" value="3" id="12C">
+                                <label for="12C">一般</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q12" tabindex="0" class="hidden" v-model="anwser.Q12" value="4" id="12D">
+                                <label for="12D">较差</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q12" tabindex="0" class="hidden" v-model="anwser.Q12" value="5" id="12E">
+                                <label for="12E">很差</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui blue segment">
+                    <div class="inline fields">
+                        <label for="Q13">Q13.你的牙齿碰伤或摔伤过吗？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q13" checked="" tabindex="0" class="hidden"  v-model="anwser.Q13" value="1" id="13A">
+                                <label for="13A">伤过</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q13" tabindex="0" class="hidden"  v-model="anwser.Q13" value="2" id="13B">
+                                <label for="13B">没伤过（选此项者不回答第 14  题）</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q13" tabindex="0" class="hidden"  v-model="anwser.Q13" value="3" id="13C">
+                                <label for="13C">记不清（选此项者不回答第 14  题）</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui green segment">
+                    <div class="grouped fields">
+                        <label for="Q14">Q14.你的牙齿在什么地方受过伤？（可多选）</label>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <input type="radio" name="Q14a" checked="" tabindex="0" class="hidden"  v-model="anwser.Q14a" value="1" id="14A">
+                                <label for="14A">在校园内</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <input type="radio" name="Q14b" tabindex="0" class="hidden" v-model="anwser.Q14b" value="2" id="14B">
+                                <label for="14B">在校园外</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui yellow segment">
+                    <div class="inline fields">
+                        <label for="Q15">Q15.过去的12个月里，你是否有过牙疼（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q15" checked="" tabindex="0" class="hidden" v-model="anwser.Q15" value="1" id="15A">
+                                <label for="15A">经常有</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q15" tabindex="0" class="hidden"  v-model="anwser.Q15" value="2" id="15B">
+                                <label for="15B">偶尔有</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q15" tabindex="0" class="hidden"  v-model="anwser.Q15" value="3" id="15C">
+                                <label for="15C">从来没有</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q15" tabindex="0" class="hidden"  v-model="anwser.Q15" value="4" id="15D">
+                                <label for="15D">记不清</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--16---20题-->
+                <div class="ui segment">
+                    <div class="field">
+                        <label>Q16.您看过牙吗？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q16" checked="" tabindex="0" class="hidden" v-model="anwser.Q16" value="1" id="16A">
+                                <label for="16A">看过</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q16" tabindex="0" class="hidden" v-model="anwser.Q16" value="2" id="16B">
+                                <label for="16B">从来没看过（选此项者不回答第17，18题）</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui red segment">
+                    <div class="field">
+                        <label>Q17.你最近一次看牙距现在多长时间？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q17" checked="" tabindex="0" class="hidden"
+                                       v-model="anwser.Q17" value="1" id="17A">
+                                <label for="17A">6个月以内</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q17" tabindex="0" class="hidden" v-model="anwser.Q17"
+                                       value="2" id="17B">
+                                <label for="17B">6个月至12个月</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q17" tabindex="0" class="hidden" v-model="anwser.Q17"
+                                       value="3" id="17C">
+                                <label for="17C">12个月以上（选此项者不回答第18题）</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui green segment">
+                    <div class="inline fields">
+                        <label for="Q18">Q18.你最近一次看牙的主要原因是什么？（单选）</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q18" checked="" tabindex="0" class="hidden" v-model="anwser.Q18" value="1" id="18A">
+                                <label for="18A">咨询检查</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q18" tabindex="0" class="hidden" v-model="anwser.Q18" value="2" id="18B">
+                                <label for="18B">预防</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q18" tabindex="0" class="hidden" v-model="anwser.Q18" value="3" id="18C">
+                                <label for="18C">治疗</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q18" tabindex="0" class="hidden" v-model="anwser.Q18" value="4" id="18D">
+                                <label for="18D">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui blue segment">
+                    <div class="field">
+                        <label for="Q19">Q19.您认为下面的说法是否正确？（每小题只选一个答案）</label>
+                    </div>
+                    <div class="field">
+                        <label for="Q19">(1)刷牙时牙龈出血是正常的</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-1" checked="" tabindex="0" class="hidden"  v-model="anwser.Q19a" value="1" id="19a1">
+                                <label for="19a1">正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-1" tabindex="0" class="hidden" v-model="anwser.Q19a" value="2" id="19a2">
+                                <label for="19a2">不正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-1" tabindex="0" class="hidden" v-model="anwser.Q19a" value="8" id="19a3">
+                                <label for="19a3">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q19">(2)细菌可以引起牙龈发炎</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-2" checked="" tabindex="0" class="hidden" v-model="anwser.Q19b" value="1" id="19b1">
+                                <label for="19b1">正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-2" tabindex="0" class="hidden" v-model="anwser.Q19b" value="2" id="19b2">
+                                <label for="19b2">不正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-2" tabindex="0" class="hidden" v-model="anwser.Q19b" value="8" id="19b3">
+                                <label for="19b3">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q19">(3)刷牙对预防牙龈发炎没有用</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-3" checked="" tabindex="0" class="hidden" v-model="anwser.Q19c" value="1" id="19c1">
+                                <label for="19c1">正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-3" tabindex="0" class="hidden" v-model="anwser.Q19c" value="2" id="19c2">
+                                <label for="19c2">不正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-3" tabindex="0" class="hidden" v-model="anwser.Q19c" value="8" id="19c3">
+                                <label for="19c3">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q19">(4)细菌可以引起龋齿</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-4" checked="" tabindex="0" class="hidden" v-model="anwser.Q19d" value="1" id="19d1">
+                                <label for="19d1">正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-4" tabindex="0" class="hidden" v-model="anwser.Q19d" value="2" id="19d2">
+                                <label for="19d2">不正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-4" tabindex="0" class="hidden" v-model="anwser.Q19d" value="8" id="19d3">
+                                <label for="19d3">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q19">(5)吃糖可以导致龋齿</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-5" checked="" tabindex="0" class="hidden" v-model="anwser.Q19e" value="1" id="19e1">
+                                <label for="19e1">正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-5" tabindex="0" class="hidden" v-model="anwser.Q19e" value="2" id="19e2">
+                                <label for="19e2">不正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-5" tabindex="0" class="hidden" v-model="anwser.Q19e" value="8" id="19e3">
+                                <label for="19e3">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q19">(6)氟化物对保护牙齿没有用</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-6" checked="" tabindex="0" class="hidden" v-model="anwser.Q19f" value="1" id="19f1">
+                                <label for="19f1">正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-6" tabindex="0" class="hidden" v-model="anwser.Q19f" value="2" id="19f2">
+                                <label for="19f2">不正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-6" tabindex="0" class="hidden" v-model="anwser.Q19f" value="8" id="19f3">
+                                <label for="19f3">不知道</label>
+                            </div>
+                        </div>
+                        </div>
+                     <div class="field">
+                        <label for="Q19">(7)窝沟封闭可以保护龋齿</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-7" checked="" tabindex="0" class="hidden" v-model="anwser.Q19g" value="1" id="19g1">
+                                <label for="19g1">正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-7" tabindex="0" class="hidden" v-model="anwser.Q19g" value="2" id="19g2">
+                                <label for="19g2">不正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-7" tabindex="0" class="hidden" v-model="anwser.Q19g" value="8" id="19g3">
+                                <label for="19g3">不知道</label>
+                            </div>
+                        </div>
+                        </div>
+                     <div class="field">
+                        <label for="Q19">(8)口腔疾病可能会影响全身健康</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-8" checked="" tabindex="0" class="hidden" v-model="anwser.Q19h" value="1" id="19h1">
+                                <label for="19h1">正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-8" tabindex="0" class="hidden" v-model="anwser.Q19h" value="2" id="19h2">
+                                <label for="19h2">不正确</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q19-8" tabindex="0" class="hidden" v-model="anwser.Q19h" value="8" id="19h3">
+                                <label for="19h3">不知道</label>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+
+                <div class="ui blue segment">
+                    <div class="field">
+                        <label for="Q20">Q20.你对以下的说法的看法如何？（每小题只选一个答案）</label>
+                    </div>
+                    <div class="field">
+                        <label for="Q20">(1)口腔健康对自己的生活很重要</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-1" checked="" tabindex="0" class="hidden"  v-model="anwser.Q20a" value="1" id="20a1">
+                                <label for="20a1">同意</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-1" tabindex="0" class="hidden" v-model="anwser.Q20a" value="2" id="20a2">
+                                <label for="20a2">不同意</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-1" tabindex="0" class="hidden" v-model="anwser.Q20a" value="8" id="20a3">
+                                <label for="20a3">无所谓</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-1" tabindex="0" class="hidden" v-model="anwser.Q20a" value="9" id="20a4">
+                                <label for="20a4">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q20">(2)定期检查口腔是十分必要的</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-2" checked="" tabindex="0" class="hidden" v-model="anwser.Q20b" value="1" id="20b1">
+                                <label for="20b1">同意</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-2" tabindex="0" class="hidden" v-model="anwser.Q20b" value="2" id="20b2">
+                                <label for="20b2">不同意</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-2" tabindex="0" class="hidden" v-model="anwser.Q20b" value="8" id="20b3">
+                                <label for="20b3">无所谓</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-2" tabindex="0" class="hidden" v-model="anwser.Q20b" value="9" id="20b4">
+                                <label for="20b4">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q20">(3)牙齿的好坏是天生的，与自己的保护关系不大</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-3" checked="" tabindex="0" class="hidden" v-model="anwser.Q20c" value="1" id="20c1">
+                                <label for="20c1">同意</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-3" tabindex="0" class="hidden" v-model="anwser.Q20c" value="2" id="20c2">
+                                <label for="20c2">不同意</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-3" tabindex="0" class="hidden" v-model="anwser.Q20c" value="8" id="20c3">
+                                <label for="20c3">无所谓</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-3" tabindex="0" class="hidden" v-model="anwser.Q20c" value="9" id="20c4">
+                                <label for="20c4">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q20">(4)预防牙病首先靠自己</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-4" checked="" tabindex="0" class="hidden" v-model="anwser.Q20d" value="1" id="20d1">
+                                <label for="20d1">同意</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-4" tabindex="0" class="hidden" v-model="anwser.Q20d" value="2" id="20d2">
+                                <label for="20d2">不同意</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-4" tabindex="0" class="hidden" v-model="anwser.Q20d" value="8" id="20d3">
+                                <label for="20d3">无所谓</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q20-4" tabindex="0" class="hidden" v-model="anwser.Q20d" value="9" id="20d4">
+                                <label for="20d4">不知道</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="four fields">
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                        <div class="ui submit button" style="margin-right: 50px" >
+                            <a class="section" href="/index/B_XS/B_XS-3/" v-on:click="putToStorage">下一页</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $('.ui.radio.checkbox').checkbox();
+        $('.list .master.checkbox').checkbox({
+                // check all children
+                onChecked: function () {
+                    var
+                        $childCheckbox = $(this).closest('.checkbox').siblings('.list').find('.checkbox')
+                    ;
+                    $childCheckbox.checkbox('check');
+                },
+                // uncheck all children
+                onUnchecked: function () {
+                    var
+                        $childCheckbox = $(this).closest('.checkbox').siblings('.list').find('.checkbox')
+                    ;
+                    $childCheckbox.checkbox('uncheck');
+                }
+            });
+        $('.list .child.checkbox').checkbox({
+            // Fire on load to set parent value
+            fireOnInit: true,
+            // Change parent state on each child checkbox change
+            onChange: function () {
+                var
+                    $listGroup = $(this).closest('.list'),
+                    $parentCheckbox = $listGroup.closest('.item').children('.checkbox'),
+                    $checkbox = $listGroup.find('.checkbox'),
+                    allChecked = true,
+                    allUnchecked = true
+                ;
+                // check to see if all other siblings are checked or unchecked
+                $checkbox.each(function () {
+                    if ($(this).checkbox('is checked')) {
+                        allUnchecked = false;
+                    }
+                    else {
+                        allChecked = false;
+                    }
+                });
+                // set parent checkbox state, but dont trigger its onChange callback
+                if (allChecked) {
+                    $parentCheckbox.checkbox('set checked');
+                }
+                else if (allUnchecked) {
+                    $parentCheckbox.checkbox('set unchecked');
+                }
+                else {
+                    $parentCheckbox.checkbox('set indeterminate');
+                }
+            }
+        });
+        var info = new Vue({
+            el:'#app',
+            data:{
+                anwser:{
+                    Q11: "",
+                    Q12: "",
+                    Q13: "",
+                    Q14a:"",
+                    Q14b:"",
+                    Q15:"",
+                    Q16 :"",
+                    Q17 :"",
+                    Q18 :"",
+                    Q19a :"",
+                    Q19b :"",
+                    Q19c :"",
+                    Q19d :"",
+                    Q19e :"",
+                    Q19f :"",
+                    Q19g :"",
+                    Q19h :"",
+                    Q20a :"",
+                    Q20b :"",
+                    Q20c :"",
+                    Q20d :"",
+                }
+            },
+             methods: {
+
+                 putToStorage: function () {
+                     var Q14 = this.anwser.Q14a+","+this.anwser.Q14b;
+                     u.setStorage("Q11", this.anwser.Q11);
+                     u.setStorage("Q12", this.anwser.Q12);
+                     u.setStorage("Q13", this.anwser.Q13);
+                     u.setStorage("Q14", Q14);
+                     u.setStorage("Q15", this.anwser.Q15);
+                     u.setStorage("Q16", this.anwser.Q16);
+                     u.setStorage("Q17", this.anwser.Q17);
+                     u.setStorage("Q18", this.anwser.Q18);
+                     u.setStorage("Q19a", this.anwser.Q19a);
+                     u.setStorage("Q19b", this.anwser.Q19b);
+                     u.setStorage("Q19c", this.anwser.Q19c);
+                     u.setStorage("Q19d", this.anwser.Q19d);
+                     u.setStorage("Q19e", this.anwser.Q19e);
+                     u.setStorage("Q19f", this.anwser.Q19f);
+                     u.setStorage("Q19g", this.anwser.Q19g);
+                     u.setStorage("Q19h", this.anwser.Q19h);
+                     u.setStorage("Q20a", this.anwser.Q20a);
+                     u.setStorage("Q20b", this.anwser.Q20b);
+                     u.setStorage("Q20c", this.anwser.Q20c);
+                     u.setStorage("Q20d", this.anwser.Q20d);
+                     /*
+                     var that = this;
+                     //console.log(src);
+                     $.ajax({
+                         type: "POST",
+                         data: {
+                             "api_key": "deQI3zInZt_NbZYtFW6Pe8UzvYe8P-pf",
+                             "api_secret": "xYmv45t2Dvj5YHd9uwQrIOnFKPyG1-Bn",
+                             "return_attributes": "gender,age,facequality,smiling,emotion,beauty,skinstatus",
+                             "image_base64": that.src,
+                         },
+                         url: "https://api-cn.faceplusplus.com/facepp/v3/detect",
+                         success: function (data) {
+
+                         }
+                     })  */
+                 },
+             }
+        });
+    </script>
+</body>
+</html>

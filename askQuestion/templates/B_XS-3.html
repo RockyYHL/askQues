@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生问卷（第三页）</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" class="ui" href="http://www.semantic-ui.cn/dist/semantic.min.css">
+    <script type="text/javascript" src="http://www.semantic-ui.cn/javascript/library/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.semantic-ui.cn/dist/semantic.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <style type="text/css">
+        .datimianban{margin:0 auto; width:800px;}
+    </style>
+    <!--缓存设置-->
+    <script>
+        //定义全局变量函数
+        var uzStorage = function () {
+            var ls = window.localStorage;
+            return ls;
+        };
+        //定义全局变量u
+        var u = {};
+        //设置缓存
+        u.setStorage = function (key, value) {
+            var v = value;
+            if (typeof v == 'object') {
+                v = JSON.stringify(v);
+                v = 'obj-' + v;
+            } else {
+                v = 'str-' + v;
+            }
+            var ls = uzStorage();
+            if (ls) {
+                ls.setItem(key, v);
+            }
+        };
+        //获取缓存
+        u.getStorage = function (key) {
+            var ls = uzStorage();
+            if (ls) {
+                var v = ls.getItem(key);
+                if (!v) {
+                    return;
+                }
+                if (v.indexOf('obj-') === 0) {
+                    v = v.slice(4);
+                    return JSON.parse(v);
+                } else if (v.indexOf('str-') === 0) {
+                    return v.slice(4);
+                }
+            }
+        };
+        //清理缓存
+        u.clearStorage = function() {
+            localStorage.clear()
+        };
+
+    </script>
+</head>
+<body>
+     <div class="datimianban" id="app">
+        <form class="ui form">
+            <div class="ui segments">
+                <div class="ui huge breadcrumb">
+                    <a class="section" href="/index/">问卷调查首页</a>
+                    <a class="section">|</a>
+                    <a class="section">儿童家长问卷</a>
+                </div>
+                <h3 class="ui horizontal divider header">
+                    答题部分
+                </h3>
+                <!--答题部分-->
+                <h4 class="ui dividing header">同学们：<br>&nbsp;&nbsp;你们好！为进一步做好儿童、青少年的口腔保健工作，我们很想知道你对口腔保健的想法和做法，本调查与你们的学习成绩无关，调查结果也不会告诉家长和老师。希望你们按题目的要求如实回答。谢谢！</h4>
+                <h4 class="ui dividing header">要求：请选择相应的选择题选项。</h4>
+                <!--21---25题-->
+                <div class="ui blue segment">
+                    <div class="field">
+                        <label for="Q21">Q21.在过去的6个月里，口腔问题对你以下方面的影响有多大？（每小题只选一个答案）</label>
+                    </div>
+                    <div class="field">
+                        <label for="Q21">(1)吃东西</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-1" checked="" tabindex="0" class="hidden"  v-model="anwser.Q21a" value="1" id="21a1">
+                                <label for="21a1">严重影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-1" tabindex="0" class="hidden" v-model="anwser.Q21a" value="2" id="21a2">
+                                <label for="21a2">一般影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-1" tabindex="0" class="hidden" v-model="anwser.Q21a" value="3" id="21a3">
+                                <label for="21a3">轻微影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-1" tabindex="0" class="hidden" v-model="anwser.Q21a" value="4" id="21a4">
+                                <label for="21a4">不影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-1" tabindex="0" class="hidden" v-model="anwser.Q21a" value="5" id="21a5">
+                                <label for="21a5">不清楚</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q21">(2)发音</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-2" checked="" tabindex="0" class="hidden" v-model="anwser.Q21b" value="1" id="21b1">
+                                <label for="21b1">严重影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-2" tabindex="0" class="hidden" v-model="anwser.Q21b" value="2" id="21b2">
+                                <label for="21b2">一般影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-2" tabindex="0" class="hidden" v-model="anwser.Q21b" value="3" id="21b3">
+                                <label for="21b3">轻微影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-2" tabindex="0" class="hidden" v-model="anwser.Q21b" value="4" id="21b4">
+                                <label for="21b4">不影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-2" tabindex="0" class="hidden" v-model="anwser.Q21b" value="5" id="21b5">
+                                <label for="21b5">不清楚</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q21">(3)刷牙或漱口</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-3" checked="" tabindex="0" class="hidden" v-model="anwser.Q21c" value="1" id="21c1">
+                                <label for="21c1">严重影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-3" tabindex="0" class="hidden" v-model="anwser.Q21c" value="2" id="21c2">
+                                <label for="21c2">一般影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-3" tabindex="0" class="hidden" v-model="anwser.Q21c" value="3" id="21c3">
+                                <label for="21c3">轻微影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-3" tabindex="0" class="hidden" v-model="anwser.Q21c" value="4" id="21c4">
+                                <label for="21c4">不影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-3" tabindex="0" class="hidden" v-model="anwser.Q21c" value="5" id="21c5">
+                                <label for="21c5">不清楚</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q21">(4)做家务</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-4" checked="" tabindex="0" class="hidden" v-model="anwser.Q21d" value="1" id="21d1">
+                                <label for="21d1">严重影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-4" tabindex="0" class="hidden" v-model="anwser.Q21d" value="2" id="21d2">
+                                <label for="21d2">一般影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-4" tabindex="0" class="hidden" v-model="anwser.Q21d" value="3" id="21d3">
+                                <label for="21d3">轻微影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-4" tabindex="0" class="hidden" v-model="anwser.Q21d" value="4" id="21d4">
+                                <label for="21d4">不影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-4" tabindex="0" class="hidden" v-model="anwser.Q21d" value="5" id="21d5">
+                                <label for="21d5">不清楚</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q21">(5)上学</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-5" checked="" tabindex="0" class="hidden" v-model="anwser.Q21e" value="1" id="21e1">
+                                <label for="21e1">严重影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-5" tabindex="0" class="hidden" v-model="anwser.Q21e" value="2" id="21e2">
+                                <label for="21e2">一般影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-5" tabindex="0" class="hidden" v-model="anwser.Q21e" value="3" id="21e3">
+                                <label for="21e3">轻微影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-5" tabindex="0" class="hidden" v-model="anwser.Q21e" value="4" id="21e4">
+                                <label for="21e4">不影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-5" tabindex="0" class="hidden" v-model="anwser.Q21e" value="5" id="21e5">
+                                <label for="21e5">不清楚</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q21">(6)睡眠</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-6" checked="" tabindex="0" class="hidden" v-model="anwser.Q21f" value="1" id="21f1">
+                                <label for="21f1">严重影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-6" tabindex="0" class="hidden" v-model="anwser.Q21f" value="2" id="21f2">
+                                <label for="21f2">一般影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-6" tabindex="0" class="hidden" v-model="anwser.Q21f" value="3" id="21f3">
+                                <label for="21f3">轻微影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-6" tabindex="0" class="hidden" v-model="anwser.Q21f" value="4" id="21f4">
+                                <label for="21f4">不影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-6" tabindex="0" class="hidden" v-model="anwser.Q21f" value="5" id="21f5">
+                                <label for="21f5">不清楚</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q21">(7)露牙微笑</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-7" checked="" tabindex="0" class="hidden" v-model="anwser.Q21g" value="1" id="21g1">
+                                <label for="21g1">严重影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-7" tabindex="0" class="hidden" v-model="anwser.Q21g" value="2" id="21g2">
+                                <label for="21g2">一般影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-7" tabindex="0" class="hidden" v-model="anwser.Q21g" value="3" id="21g3">
+                                <label for="21g3">轻微影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-7" tabindex="0" class="hidden" v-model="anwser.Q21g" value="4" id="21g4">
+                                <label for="21g4">不影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-7" tabindex="0" class="hidden" v-model="anwser.Q21g" value="5" id="21g5">
+                                <label for="21g5">不清楚</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q21">(8)容易烦恼</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-8" checked="" tabindex="0" class="hidden" v-model="anwser.Q21h" value="1" id="21h1">
+                                <label for="21h1">严重影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-8" tabindex="0" class="hidden" v-model="anwser.Q21h" value="2" id="21h2">
+                                <label for="21h2">一般影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-8" tabindex="0" class="hidden" v-model="anwser.Q21h" value="3" id="21h3">
+                                <label for="21h3">轻微影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-8" tabindex="0" class="hidden" v-model="anwser.Q21h" value="4" id="21h4">
+                                <label for="21h4">不影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-8" tabindex="0" class="hidden" v-model="anwser.Q21h" value="5" id="21h5">
+                                <label for="21h5">不清楚</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Q21">(9)人际交往</label>
+                    </div>
+                    <div class="inline fields">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-9" checked="" tabindex="0" class="hidden" v-model="anwser.Q21i" value="1" id="21i1">
+                                <label for="21i1">严重影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-9" tabindex="0" class="hidden" v-model="anwser.Q21i" value="2" id="21i2">
+                                <label for="21i2">一般影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-9" tabindex="0" class="hidden" v-model="anwser.Q21i" value="3" id="21i3">
+                                <label for="21i3">轻微影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-9" tabindex="0" class="hidden" v-model="anwser.Q21i" value="4" id="21i4">
+                                <label for="21i4">不影响</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="Q21-9" tabindex="0" class="hidden" v-model="anwser.Q21i" value="5" id="21i5">
+                                <label for="21i5">不清楚</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui blue segment">
+                    <div class="field">
+                        <label>Q22.上学期，你在学校上过有（）次口腔保健内容的课？（请填写一个整数，不知道或拒绝回答的填写"N"）</label>
+                        <div class="field">
+                            <input type="text" name="Q22" placeholder="请输入人口数" v-model="anwser.Q22">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui segment">
+                </div>
+
+                <div class="four fields">
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                        <div class="ui submit button" style="margin-right: 50px" >
+                            <a class="section" href="/index/endpage/" v-on:click="putToBase">确认提交</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $('.ui.radio.checkbox').checkbox();
+        var info = new Vue({
+            el:'#app',
+            data:{
+                anwser:{
+                    Q21a: "",
+                    Q21b: "",
+                    Q21c: "",
+                    Q21d: "",
+                    Q21e: "",
+                    Q21f: "",
+                    Q21g: "",
+                    Q21h: "",
+                    Q21i: "",
+                    Q22: "",
+
+                },
+                 msg:""
+            },
+             methods: {
+
+                 putToBase: function () {
+                     this.anwser.PopulationID = u.getStorage("PopulationID");
+                     this.anwser.name = u.getStorage("name");
+                     this.anwser.school = u.getStorage("school");
+                     this.anwser.grade = u.getStorage("grade");
+                     this.anwser.classes = u.getStorage("classes");
+                     this.anwser.checkYear = u.getStorage("checkYear");
+                     this.anwser.checkMonth = u.getStorage("checkMonth");
+                     this.anwser.checkDay = u.getStorage("checkDay");
+                     this.anwser.checkerID = u.getStorage("checkerID");
+                     this.anwser.Q1 = u.getStorage("Q1");
+                     this.anwser.Q2 = u.getStorage("Q2");
+                     this.anwser.Q3 = u.getStorage("Q3");
+                     this.anwser.Q4 = u.getStorage("Q4");
+                     this.anwser.Q5 = u.getStorage("Q5");
+                     this.anwser.Q6 = u.getStorage("Q6");
+                     this.anwser.Q7 = u.getStorage("Q7");
+                     this.anwser.Q8 = u.getStorage("Q8");
+                     this.anwser.Q9a = u.getStorage("Q9a");
+                     this.anwser.Q9b= u.getStorage("Q9b");
+                     this.anwser.Q9c = u.getStorage("Q9c");
+                     this.anwser.Q10 = u.getStorage("Q10");
+                     this.anwser.Q11 = u.getStorage("Q11");
+                     this.anwser.Q12 = u.getStorage("Q12");
+                     this.anwser.Q13 = u.getStorage("Q13");
+                     this.anwser.Q14 = u.getStorage("Q14");
+                     this.anwser.Q15 = u.getStorage("Q15");
+                     this.anwser.Q16 = u.getStorage("Q16");
+                     this.anwser.Q17 = u.getStorage("Q17");
+                     this.anwser.Q18 = u.getStorage("Q18");
+                     this.anwser.Q19a = u.getStorage("Q19a");
+                     this.anwser.Q19b = u.getStorage("Q19b");
+                     this.anwser.Q19c = u.getStorage("Q19c");
+                     this.anwser.Q19d = u.getStorage("Q19d");
+                     this.anwser.Q19e = u.getStorage("Q19e");
+                     this.anwser.Q19f = u.getStorage("Q19f");
+                     this.anwser.Q19g = u.getStorage("Q19g");
+                     this.anwser.Q19h = u.getStorage("Q19h");
+                     this.anwser.Q20a = u.getStorage("Q20a");
+                     this.anwser.Q20b = u.getStorage("Q20b");
+                     this.anwser.Q20c = u.getStorage("Q20c");
+                     this.anwser.Q20d = u.getStorage("Q20d");
+                     //console.log("？？？？？？？？？？？")
+
+                     var that = this;
+                     //console.log(src);
+                     $.ajax({
+                         type: "POST",
+                         data: {
+                             "answer": this.anwser,
+                         },
+                         //url: "http://localhost:8000/api/setToBase/",
+                         url: "/api/setToBase2/",
+
+                         success: function (data) {
+                             if(data.status==1){
+                                 that.msg=data.msg;
+                                 console.log(that.msg)
+                             }
+                             else{
+                                 that.msg="录入数据失败，请重新作答！"
+                                 console.log(that.msg)
+                             }
+
+                             //localStorage.clear()
+
+                         }
+                     })
+                 },
+             }
+        });
+    </script>
+</body>
+</html>

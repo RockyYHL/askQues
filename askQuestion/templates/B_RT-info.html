@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>儿童家长问卷（信息填写）</title>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" class="ui" href="http://www.semantic-ui.cn/dist/semantic.min.css">
+    <script type="text/javascript" src="http://www.semantic-ui.cn/javascript/library/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.semantic-ui.cn/dist/semantic.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <style type="text/css">
+        .datimianban{margin:100px auto; width:600px;}
+    </style>
+    <!--缓存设置-->
+    <script>
+        //定义全局变量函数
+        var uzStorage = function () {
+            var ls = window.localStorage;
+            return ls;
+        };
+        //定义全局变量u
+        var u = {};
+        //设置缓存
+        u.setStorage = function (key, value) {
+            var v = value;
+            if (typeof v == 'object') {
+                v = JSON.stringify(v);
+                v = 'obj-' + v;
+            } else {
+                v = 'str-' + v;
+            }
+            var ls = uzStorage();
+            if (ls) {
+                ls.setItem(key, v);
+            }
+        };
+        //获取缓存
+        u.getStorage = function (key) {
+            var ls = uzStorage();
+            if (ls) {
+                var v = ls.getItem(key);
+                if (!v) {
+                    return;
+                }
+                if (v.indexOf('obj-') === 0) {
+                    v = v.slice(4);
+                    return JSON.parse(v);
+                } else if (v.indexOf('str-') === 0) {
+                    return v.slice(4);
+                }
+            }
+        };
+        //清理缓存
+        u.clearStorage = function() {
+            localStorage.clear()
+        };
+
+    </script>
+</head>
+<body >
+     <div class="datimianban" >
+         <div id="app">
+             <form class="ui form">
+            <div class="ui segments">
+                <div class="ui huge breadcrumb">
+                    <a class="section" href="/index/">问卷调查首页</a>
+                    <a class="section">|</a>
+                    <a class="section">儿童家长问卷</a>
+                </div>
+                <!--身份信息填写部分-->
+                <h3 class="ui horizontal divider header">
+                    信息填写
+                </h3>
+                <div class="field">
+                    <label>PopulationID</label>
+                    <div class="field">
+                        <input type="text" name="PopulationID" placeholder="请输入您的ID号" v-model="infodata.PopulationID">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>被检查者儿童姓名</label>
+                    <div class="field">
+                        <input type="text" name="name" placeholder="请输入您的孩子姓名" v-model="infodata.name">
+                    </div>
+                </div>
+
+                <div class="three fields">
+                    <div class="field">
+                        <label>检查年份</label>
+                        <div class="field">
+                            <select class="ui fluid dropdown" v-model="infodata.checkYear">
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                                <option value="2012">2012</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>检查月</label>
+                        <div class="field">
+                            <select class="ui fluid dropdown" v-model="infodata.checkMonth">
+                                <option value="12">12</option>
+                                <option value="11">11</option>
+                                <option value="10">10</option>
+                                <option value="9">9</option>
+                                <option value="8">8</option>
+                                <option value="7">7</option>
+                                <option value="6">6</option>
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>检查日</label>
+                        <div class="field">
+                            <select class="ui fluid dropdown" v-model="infodata.checkDay">
+                                <option value="31">31</option>
+                                <option value="30">30</option>
+                                <option value="29">29</option>
+                                <option value="28">28</option>
+                                <option value="27">27</option>
+                                <option value="26">26</option>
+                                <option value="25">25</option>
+                                <option value="24">24</option>
+                                <option value="23">23</option>
+                                <option value="22">22</option>
+                                <option value="21">21</option>
+                                <option value="20">20</option>
+                                <option value="19">19</option>
+                                <option value="18">18</option>
+                                <option value="17">17</option>
+                                <option value="16">16</option>
+                                <option value="15">15</option>
+                                <option value="14">14</option>
+                                <option value="13">13</option>
+                                <option value="12">12</option>
+                                <option value="11">11</option>
+                                <option value="10">10</option>
+                                <option value="9">9</option>
+                                <option value="8">8</option>
+                                <option value="7">7</option>
+                                <option value="6">6</option>
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>调查员编号</label>
+                    <div class="field">
+                        <div class="field">
+                            <select class="ui fluid dropdown" v-model="infodata.checkerID">
+                                <option value="8">8</option>
+                                <option value="7">7</option>
+                                <option value="6">6</option>
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="three fields">
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                    </div>
+                    <div class="field">
+                        <div class="ui submit button" style="margin-right: 50px" >
+                            <a class="section" href="/index/B_RT/B_RT-1/" v-on:click="putToStorage">开始答题</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+         </div>
+    </div>
+
+    <script>
+        $('.ui.radio.checkbox').checkbox();
+         var info = new Vue({
+            el:'#app',
+            data:{
+                infodata:{
+                    PopulationID: "",
+                    name: "",
+                    gender: "",
+                    nation:"",
+                    populationType:"",
+                    birthYear :"",
+                    birthMonth :"",
+                    birthDay :"",
+                    checkYear :"",
+                    checkMonth :"",
+                    checkDay :"",
+                    checkerID :""
+                }
+            },
+             methods: {
+
+                 putToStorage: function () {
+                     u.setStorage("PopulationID", this.infodata.PopulationID);
+                     u.setStorage("name", this.infodata.name);
+                     u.setStorage("gender", this.infodata.gender);
+                     u.setStorage("nation", this.infodata.nation);
+                     u.setStorage("populationType", this.infodata.populationType);
+                     u.setStorage("birthYear", this.infodata.birthYear);
+                     u.setStorage("birthMonth", this.infodata.birthMonth);
+                     u.setStorage("birthDay", this.infodata.birthDay);
+                     u.setStorage("checkYear", this.infodata.checkYear);
+                     u.setStorage("checkMonth", this.infodata.checkMonth);
+                     u.setStorage("checkDay", this.infodata.checkDay);
+                     u.setStorage("checkerID", this.infodata.checkerID);
+                     /*
+                     var that = this;
+                     //console.log(src);
+                     $.ajax({
+                         type: "POST",
+                         data: {
+                             "api_key": "deQI3zInZt_NbZYtFW6Pe8UzvYe8P-pf",
+                             "api_secret": "xYmv45t2Dvj5YHd9uwQrIOnFKPyG1-Bn",
+                             "return_attributes": "gender,age,facequality,smiling,emotion,beauty,skinstatus",
+                             "image_base64": that.src,
+                         },
+                         url: "https://api-cn.faceplusplus.com/facepp/v3/detect",
+                         success: function (data) {
+
+                         }
+                     })  */
+                 },
+             }
+        });
+        //console.log(info.infodata.gender)
+    </script>
+</body>
+</html>
